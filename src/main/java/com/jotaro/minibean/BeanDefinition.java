@@ -10,13 +10,14 @@ import lombok.NoArgsConstructor;
  */
 
 
-
 @Data
 @AllArgsConstructor
 public class BeanDefinition {
 
+    // 一般为beanName
     private String id;
 
+    // 全类名
     private String className;
     
 }

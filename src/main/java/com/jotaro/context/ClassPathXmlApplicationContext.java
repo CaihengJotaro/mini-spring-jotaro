@@ -18,8 +18,10 @@ import com.jotaro.minibean.BeanDefinition;
  * @description xml文件解析器
  */
 public class ClassPathXmlApplicationContext {
+    // beanDefinition列表
     private List<BeanDefinition>beanDefinitions = new ArrayList<>();
-    private Map<String,Object>singletons = new HashMap<>();
+    // bean单例工厂（一级缓存）
+    private Map<String,Object> singletons = new HashMap<>();
 
     public ClassPathXmlApplicationContext(String fileName){
         this.readXml(fileName);
