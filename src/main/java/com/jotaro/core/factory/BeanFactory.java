@@ -28,4 +28,26 @@ public interface BeanFactory {
      * @return
      */
     boolean containsBean(String name);
+
+    /**
+     * 判断bean是否是单例
+     * @param name
+     * @return
+     */
+    boolean isSingleton(String name);
+
+    /**
+     * 判断bean是否是多例
+     * @param name
+     * @return
+     */
+    boolean isPrototype(String name);
+
+
+    /**
+     * 获取bean的class类型
+     * @param name
+     * @return
+     */
+    Class<?> getType(String name);
 }

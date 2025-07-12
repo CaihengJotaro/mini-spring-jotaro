@@ -1,5 +1,6 @@
 package com.jotaro.core.model.props;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -8,9 +9,11 @@ import lombok.Data;
  * @description init注入
  */
 @Data
+@AllArgsConstructor
 public class PropertyValue {
-    private final String name;
-    private final Object value;
+    private String type;
+    private String name;
+    private Object value;
     public PropertyValue(String name, Object value) {
         this.name = name;
         this.value = value;

@@ -8,17 +8,19 @@ import com.jotaro.core.code.JotaroErrorCode;
  * @description 自定义异常
  */
 
-public class JoatroSpringException extends RuntimeException {
+public class JotaroSpringException extends RuntimeException {
 
     private String code;
 
-    public JoatroSpringException(String message) {
+    private String message;
+
+    public JotaroSpringException (String message) {
         super(message);
     }
 
-    public JoatroSpringException(JotaroErrorCode errorCode, String formatMsg) {
+    public JotaroSpringException (JotaroErrorCode errorCode, Object... formatMsg) {
         String msg = String.format(errorCode.getMsg(),formatMsg);
-        super(msg);
+        this.message = msg;
         this.code = errorCode.getCode();
     }
 }

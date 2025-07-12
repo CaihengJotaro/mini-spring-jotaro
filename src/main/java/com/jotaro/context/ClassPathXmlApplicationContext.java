@@ -1,5 +1,7 @@
 package com.jotaro.context;
 
+import com.jotaro.core.event.ApplicationEvent;
+import com.jotaro.core.event.ApplicationEventPublisher;
 import com.jotaro.core.factory.BeanFactory;
 import com.jotaro.core.factory.impl.JotaroBeanFactoryImpl;
 import com.jotaro.core.resource.Resource;
@@ -13,7 +15,7 @@ import com.jotaro.core.model.BeanDefinition;
  * @date 2025/7/11
  * @description xml文件解析器
  */
-public class ClassPathXmlApplicationContext implements BeanFactory {
+public class ClassPathXmlApplicationContext implements BeanFactory, ApplicationEventPublisher {
     private BeanFactory beanFactory;
 
     public ClassPathXmlApplicationContext(String fileName) {
@@ -38,5 +40,24 @@ public class ClassPathXmlApplicationContext implements BeanFactory {
     @Override
     public boolean containsBean(String name) {
         return this.beanFactory.containsBean(name);
+    }
+
+    @Override
+    public boolean isSingleton(String name) {
+        return this.beanFactory.isSingleton(name);
+    }
+
+    @Override
+    public boolean isPrototype(String name) {
+        return this.beanFactory.isPrototype(name);
+    }
+
+    @Override
+    public Class<?> getType(String name) {
+        return this.beanFactory.getType(name);
+    }
+
+    public void publishEvent(ApplicationEvent event) {
+
     }
 }

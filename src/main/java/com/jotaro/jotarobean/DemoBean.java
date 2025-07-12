@@ -20,7 +20,7 @@ public class DemoBean {
     private int number;
 
     public void demoTest(){
-        System.out.println("hello miniSpring");
+        System.out.println("hello jotaro-Spring");
     }
     
 }

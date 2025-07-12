@@ -27,12 +27,12 @@ public class BeanDefinition {
     String SCOPE_PROTOTYPE = "prototype";
 
     /**
-     * 懒加载
+     * 懒加载标记
      */
     private boolean lazyInit = false;
 
     /**
-     * 依赖array
+     * dependsOn 属性记录 Bean 之间的依赖关系
      */
     private String[] dependsOn;
 
@@ -47,7 +47,7 @@ public class BeanDefinition {
     private PropertyValues propertyValues;
 
     /**
-     * 初始化
+     * 初始化: 当一个 Bean 构造好并实例化之后是否要让框架调用初始化方法
      */
     private String initMethodName;
 
@@ -55,6 +55,11 @@ public class BeanDefinition {
      * class记录
      */
     private volatile Object beanClass;
+
+    /**
+     * 默认单例模式
+     */
+    private String scope = SCOPE_SINGLETON;
 
     /**
      * 一般beanName
@@ -65,5 +70,31 @@ public class BeanDefinition {
      * bean的全类名
      */
     private String className;
-    
+
+    public BeanDefinition(String beanId, String className) {
+        this.beanId = beanId;
+        this.className = className;
+    }
+
+    /**
+     * 是否是单例模式
+     * @return
+     */
+    public boolean isSingleton() {
+        return SCOPE_SINGLETON.equals(scope);
+    }
+
+    /**
+     * 是否是多例模式
+     * @return
+     */
+    public boolean isPrototype() {
+        return SCOPE_PROTOTYPE.equals(scope);
+    }
+
+
+
+
+
+
 }

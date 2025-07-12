@@ -9,15 +9,16 @@ import lombok.Data;
  */
 @Data
 public class ArgumentValue {
-    private Object value;
+
     private String type;
     private String name;
+    private Object value;
 
     public ArgumentValue(Object value, String type) {
         this.value = value;
         this.type = type;
     }
-    public ArgumentValue(Object value, String type, String name) {
+    public ArgumentValue(String type, String name, Object value) {
         this.value = value;
         this.type = type;
         this.name = name;
