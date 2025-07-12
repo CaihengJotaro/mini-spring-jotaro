@@ -1,4 +1,4 @@
-package com.jotaro.minibean;
+package com.jotaro.jotarobean;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

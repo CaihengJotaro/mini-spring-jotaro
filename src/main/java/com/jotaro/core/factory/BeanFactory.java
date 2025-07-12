@@ -1,6 +1,6 @@
 package com.jotaro.core.factory;
 
-import com.jotaro.minibean.BeanDefinition;
+import com.jotaro.core.model.BeanDefinition;
 
 /**
  * @author caihengJotaro
@@ -9,9 +9,23 @@ import com.jotaro.minibean.BeanDefinition;
  */
 
 public interface BeanFactory {
-    // 获得bean
+    /**
+     * 通过beanName获得bean实例
+     * @param name
+     * @return
+     */
     Object getBean(String name);
 
-    // 注册beanDefinition
+    /**
+     * 注册beanDefinition
+     * @param beanDefinition
+     */
     void registerBeanDefinition(BeanDefinition beanDefinition);
+
+    /**
+     * 依据beanName判断是否存在该bean
+     * @param name
+     * @return
+     */
+    boolean containsBean(String name);
 }

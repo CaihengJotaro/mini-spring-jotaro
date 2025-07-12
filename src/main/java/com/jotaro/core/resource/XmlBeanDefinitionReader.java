@@ -1,6 +1,8 @@
 package com.jotaro.core.resource;
 
-import com.jotaro.core.factory.BeanFactory;
+import com.jotaro.core.factory.impl.JotaroBeanFactoryImpl;
+import com.jotaro.core.model.BeanDefinition;
+import org.dom4j.Element;
 
 /**
  * @author caihengJotaro
@@ -8,10 +10,22 @@ import com.jotaro.core.factory.BeanFactory;
  * @description xml的bean解析器
  */
 public class XmlBeanDefinitionReader {
-    // bean工厂
-    private BeanFactory beanFactory;
-    public XmlBeanDefinitionReader(final BeanFactory beanFactory) {
+    /**
+     * beanFactory实现类
+     */
+    private JotaroBeanFactoryImpl beanFactory;
+    public XmlBeanDefinitionReader(final JotaroBeanFactoryImpl beanFactory) {
         this.beanFactory = beanFactory;
+    }
+
+    public void loadBeanDefinitions(final Resource resource) {
+        while(resource.hasNext()){
+            Element element = (Element) resource.next();
+            String beanId = element.attributeValue("beanId");
+            String className = element.attributeValue("className");
+            BeanDefinition beanDefinition = new BeanDefinition(beanId, className);
+            this.beanFactory.registerBeanDefinition(beanDefinition);
+        }
     }
 
 

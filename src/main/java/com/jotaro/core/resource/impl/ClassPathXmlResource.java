@@ -1,5 +1,6 @@
-package com.jotaro.core.resource;
+package com.jotaro.core.resource.impl;
 
+import com.jotaro.core.resource.Resource;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -35,11 +36,11 @@ public class ClassPathXmlResource implements Resource {
 
     @Override
     public boolean hasNext() {
-        return false;
+        return this.iterator.hasNext();
     }
 
     @Override
     public Object next() {
-        return null;
+        return this.iterator.next();
     }
 }

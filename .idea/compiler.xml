@@ -7,7 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="mini-spring-origin" />
+        <module name="mini-spring-jotaro" />
       </profile>
     </annotationProcessing>
   </component>

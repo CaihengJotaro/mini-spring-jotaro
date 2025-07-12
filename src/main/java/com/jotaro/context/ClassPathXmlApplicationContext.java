@@ -1,65 +1,42 @@
 package com.jotaro.context;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.jotaro.core.factory.BeanFactory;
+import com.jotaro.core.factory.impl.JotaroBeanFactoryImpl;
+import com.jotaro.core.resource.Resource;
+import com.jotaro.core.resource.XmlBeanDefinitionReader;
+import com.jotaro.core.resource.impl.ClassPathXmlResource;
 
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
-
-import com.jotaro.minibean.BeanDefinition;
+import com.jotaro.core.model.BeanDefinition;
 
 /**
  * @author caihengJotaro
  * @date 2025/7/11
  * @description xml文件解析器
  */
-public class ClassPathXmlApplicationContext {
-    // beanDefinition列表
-    private List<BeanDefinition>beanDefinitions = new ArrayList<>();
-    // bean单例工厂（一级缓存）
-    private Map<String,Object> singletons = new HashMap<>();
+public class ClassPathXmlApplicationContext implements BeanFactory {
+    private BeanFactory beanFactory;
 
-    public ClassPathXmlApplicationContext(String fileName){
-        this.readXml(fileName);
-        this.instanceBeans();
-    }
-
-    private void readXml(String fileName){
-        SAXReader reader = new SAXReader();
-        try { 
-            URL xmlPath =this.getClass().getClassLoader().getResource(fileName); 
-            Document document = reader.read(xmlPath); 
-            Element rootElement = document.getRootElement(); //对配置文件中的每一个，进行处理 
-            for (Element element : (List<Element>) rootElement.elements()) {
-                //获取Bean的基本信息
-                String beanID = element.attributeValue("id");
-                String beanClassName = element.attributeValue("class");
-                BeanDefinition beanDefinition = new BeanDefinition(beanID,beanClassName);
-                //将Bean的定义存放到beanDefinitions
-                beanDefinitions.add(beanDefinition);
-
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
+    public ClassPathXmlApplicationContext(String fileName) {
+        Resource resource = new ClassPathXmlResource(fileName);
+        JotaroBeanFactoryImpl beanFactory = new JotaroBeanFactoryImpl();
+        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(beanFactory);
+        reader.loadBeanDefinitions(resource);
+        this.beanFactory = beanFactory;
 
     }
 
-    private void instanceBeans(){
-        for (BeanDefinition beanDefinition : beanDefinitions) {
-             try { 
-                singletons.put(beanDefinition.getId(),Class.forName(beanDefinition.getClassName()).newInstance()); 
-            }catch (Exception e) {
-                e.printStackTrace();
-            }
-         }
+    @Override
+    public Object getBean(String name) {
+        return this.beanFactory.getBean(name);
     }
 
-    public Object getBean(String beanName){
-        return singletons.get(beanName);
+    @Override
+    public void registerBeanDefinition(BeanDefinition beanDefinition) {
+        this.beanFactory.registerBeanDefinition(beanDefinition);
+    }
+
+    @Override
+    public boolean containsBean(String name) {
+        return this.beanFactory.containsBean(name);
     }
 }

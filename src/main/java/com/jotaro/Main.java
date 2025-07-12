@@ -1,6 +1,6 @@
 package com.jotaro;
 
-import com.jotaro.minibean.DemoBean;
+import com.jotaro.jotarobean.DemoBean;
 import com.jotaro.context.ClassPathXmlApplicationContext;
 
 public class Main {
