@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans>
-    <bean id = "demoBean" class = "com.jotaro.jotarobean.DemoBean"></bean>
+    <bean id = "demoBean" class = "com.jotaro.test.DemoBean"></bean>
 </beans>

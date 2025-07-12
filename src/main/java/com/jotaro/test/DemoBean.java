@@ -1,4 +1,4 @@
-package com.jotaro.jotarobean;
+package com.jotaro.test;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,8 +19,18 @@ public class DemoBean {
 
     private int number;
 
+    private String message;
+
+    private DemoBeanDep demoBeanDep;
+
+    public DemoBean(String name, int number) {
+        this.name = name;
+        this.number = number;
+    }
+
     public void demoTest(){
         System.out.println("hello jotaro-Spring");
     }
+
     
 }

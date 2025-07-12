@@ -1,3 +1,5 @@
+package com.jotaro.test;
+
 import org.junit.Test;
 
 /**

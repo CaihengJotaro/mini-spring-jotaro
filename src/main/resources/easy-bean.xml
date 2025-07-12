@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans>
+  <bean beanId="demoBean" className="com.jotaro.test.DemoBean">
+    <constructor-arg type="String" name="name" value="abc"/>
+    <constructor-arg type="int" name="number" value="3"/>
+    <property type="String" name="message" value="Someone says"/>
+    <property type="com.jotaro.test.DemoBeanDep" name="demoBeanDep" ref="demoDep"/>
+  </bean>
+  <bean beanId="demoDep" className="com.jotaro.test.DemoBeanDep">
+    <constructor-arg type="String" name="name" value="abc"/>
+    <constructor-arg type="String" name="age" value="3"/>
+    <property type="com.jotaro.test.DemoBean" name="demoBean" ref="demoBean"/>
+  </bean>
+</beans>

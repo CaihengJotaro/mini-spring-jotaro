@@ -16,14 +16,17 @@ import com.jotaro.core.model.BeanDefinition;
  * @description xml文件解析器
  */
 public class ClassPathXmlApplicationContext implements BeanFactory, ApplicationEventPublisher {
-    private BeanFactory beanFactory;
+    private JotaroBeanFactoryImpl beanFactory;
 
-    public ClassPathXmlApplicationContext(String fileName) {
+    public ClassPathXmlApplicationContext(String fileName,boolean isRefresh) {
         Resource resource = new ClassPathXmlResource(fileName);
         JotaroBeanFactoryImpl beanFactory = new JotaroBeanFactoryImpl();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(beanFactory);
         reader.loadBeanDefinitions(resource);
         this.beanFactory = beanFactory;
+        if (isRefresh) {
+            this.beanFactory.refresh();
+        }
 
     }
 

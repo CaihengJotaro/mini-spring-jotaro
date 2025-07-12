@@ -21,9 +21,14 @@ public class JotaroSingletonBeanRegistryImpl implements SingletonBeanRegistry {
     protected List<String> beanNames = Lists.newArrayList();
 
     /**
-     * 单例工厂,线程安全
+     * 单例工厂,线程安全，一级缓存
      */
     protected Map<String, Object> singletons = new ConcurrentHashMap<>();
+
+    /**
+     * 二级缓存，提前曝光
+     */
+    protected Map<String,Object> earlySingletons = new ConcurrentHashMap<>();
 
     @Override
     public void registerSingleton(String beanName, Object singletonObject) {
